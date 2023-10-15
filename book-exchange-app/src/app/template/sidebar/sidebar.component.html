@@ -1,0 +1,60 @@
+<div class="content-container">
+<clr-vertical-nav
+  [clrVerticalNavCollapsible]="true"
+  [(clrVerticalNavCollapsed)]="collapsed"
+>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <cds-icon shape="user" clrVerticalNavIcon></cds-icon>
+    Usuário
+    <clr-vertical-nav-group-children>
+      <a
+        clrVerticalNavLink
+        routerLink="perfil"
+        routerLinkActive="active"
+      >
+        Perfil
+      </a>
+      <a
+        clrVerticalNavLink
+        routerLink="colecao-pessoal"
+        routerLinkActive="active"
+      >
+        Coleção Pessoal
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <cds-icon shape="book" clrVerticalNavIcon></cds-icon>
+    Livros
+    <clr-vertical-nav-group-children>
+      <a
+        clrVerticalNavLink
+        routerLink="cadastro-livro"
+        routerLinkActive="active"
+      >
+        Cadastrar
+      </a>
+      <a
+        clrVerticalNavLink
+        routerLink="consulta-livros"
+        routerLinkActive="active"
+      >
+        Buscar
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <cds-icon shape="search" clrVerticalNavIcon></cds-icon>
+    Coleções
+    <clr-vertical-nav-group-children>
+      <a
+        clrVerticalNavLink
+        routerLink="/colecoes"
+        routerLinkActive="active"
+      >
+        Buscar
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+</clr-vertical-nav>
+</div>

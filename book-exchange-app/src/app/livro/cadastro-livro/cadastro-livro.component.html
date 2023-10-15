@@ -1,0 +1,60 @@
+<div class="main-container">
+  <header class="header-2">
+    <div class="branding">
+      <a>
+        <cds-icon shape="book"></cds-icon>
+        <span class="title">Cadastro de Livro</span>
+      </a>
+    </div>
+  </header>
+  <div class="container">
+      <br>
+      <form [formGroup]="formulario" (ngSubmit)="cadastrar()" class="form">
+        <mat-form-field class="full-width">
+          <mat-label> Título</mat-label>
+          <input matInput formControlName="titulo" />
+          <mat-error *ngIf="formulario.controls?.['titulo']">
+            <span *ngIf="formulario.controls['titulo'].errors?.['required']"
+              >O título é obrigatório.</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label> Autor</mat-label>
+          <input matInput formControlName="autor" type="text" />
+          <mat-error *ngIf="formulario.controls?.['autor']">
+            <span *ngIf="formulario.controls['autor'].errors?.['required']"
+              >O nome do autor é obrigatório.</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label> Gênero </mat-label>
+          <input matInput formControlName="genero" type="text" />
+          <mat-error *ngIf="formulario.controls?.['genero']">
+            <span *ngIf="formulario.controls['genero'].errors?.['required']"
+              >O gênero é obrigatório.</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Sinopse</mat-label>
+          <textarea matInput formControlName="descricao"></textarea>
+          <mat-error *ngIf="formulario.controls?.['descricao']">
+            <span *ngIf="formulario.controls['descricao'].errors?.['required']"
+              >A sinopse é obrigatória.</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <br />
+        <button
+          [disabled]="!formulario.valid"
+          class="btn btn-primary"
+          type="submit"
+        >
+          Cadastrar
+        </button>
+        <button class="btn btn-warning-outline" routerLink="">Voltar</button>
+      </form>
+    </div>
+</div>

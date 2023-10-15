@@ -1,0 +1,154 @@
+<div class="main-container">
+  <header class="header-2">
+    <div class="branding">
+      <a>
+        <cds-icon shape="user"></cds-icon>
+        <span class="title">Perfil do Usuário</span>
+      </a>
+    </div>
+  </header>
+  <mat-tab-group [backgroundColor]="'accent'">
+    <mat-tab label="Dados do Usuário">
+        <br/>
+          <form [formGroup]="formulario" class="form">
+            <mat-form-field class="full-width">
+              <mat-label> Nome</mat-label>
+              <input matInput formControlName="nome" />
+              <mat-error *ngIf="formulario.controls?.['nome']">
+                <span *ngIf="formulario.controls['nome'].errors?.['required']"
+                  >O nome é obrigatório.</span
+                >
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label> E-mail</mat-label>
+              <input matInput formControlName="email" type="text" />
+              <mat-error *ngIf="formulario.controls?.['email']">
+                <span *ngIf="formulario.controls['email'].errors?.['required']"
+                  >O e-mail é obrigatório.</span
+                >
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Senha</mat-label>
+              <input
+                matInput
+                formControlName="senha"
+                [type]="hide ? 'password' : 'text'"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <br />
+            <button
+              [disabled]="formulario.status == 'INVALID'"
+              class="btn btn-primary"
+              (click)="alterar()"
+            >
+              Atualizar
+            </button>
+            <button class="btn btn-warning-outline" routerLink="">
+              Voltar
+            </button>
+          </form>
+    </mat-tab>
+    <mat-tab label="Avaliações" *ngIf="totalElements != 0">
+        <div class="col-6">
+          <div *ngFor="let item of comentarios">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <mat-card-title
+                  >{{ item.nomeUsuarioAvaliador }}
+                </mat-card-title>
+                <mat-card-subtitle>{{
+                  item.dataAvaliacao | date
+                }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p style="color: white">{{ item.comentario }}</p>
+              </mat-card-content>
+            </mat-card>
+            <br />
+          </div>
+          <!-- Controle de paginação -->
+          <mat-paginator
+            [length]="totalElements"
+            [pageSize]="tamanhoPagina"
+            (page)="paginar($event)"
+          ></mat-paginator>
+        </div>
+    </mat-tab>
+    <mat-tab label="Gerenciamento">
+        <section class="example-container mat-elevation-z8" tabindex="0">
+          <table mat-table [dataSource]="solicitacoes">
+            <ng-container matColumnDef="nomeEmissor">
+              <th mat-header-cell *matHeaderCellDef>Usuário Emissor</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.nomeUsuarioEmissor }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="livroEmissor">
+              <th mat-header-cell *matHeaderCellDef>Livro do Emissor</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.tituloLivroEmissor }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="livroReceptor">
+              <th mat-header-cell *matHeaderCellDef>Seu Livro</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.tituloLivroReceptor }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element">
+                {{ status(element.status) }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acoes">
+              <th mat-header-cell *matHeaderCellDef>Ações</th>
+              <td mat-cell *matCellDef="let element">
+                <a *ngIf="element.status == 1"
+                  ><mat-icon
+                    aria-hidden="false"
+                    fontIcon="swap_horiz"
+                    matTooltip="Confirmar solicitação de troca."
+                    (click)="abrirModalConfirmacao(element)"
+                  ></mat-icon
+                ></a>
+                <p *ngIf="element.status == 2">
+                  <mat-icon
+                    aria-hidden="false"
+                    fontIcon="swap_horiz"
+                    matTooltip="Só é possível confirmar a troca quando o status está como PENDENTE."
+                    disabled
+                  ></mat-icon>
+                </p>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </section>
+    </mat-tab>
+  </mat-tab-group>
+</div>

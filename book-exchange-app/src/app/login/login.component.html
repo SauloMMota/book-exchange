@@ -1,0 +1,30 @@
+<div class="login-wrapper">
+  <form class="login" [formGroup]="formulario" (ngSubmit)="submit()">
+      <section class="title">
+          <h3 class="welcome">Book Exchange</h3>
+      </section>
+      <div class="login-group">
+          <clr-input-container>
+              <label class="clr-sr-only">E-mail</label>
+              <input type="text" autocomplete="username" maxlength="150"
+              name="username" clrInput placeholder="E-mail" formControlName="email" />
+          </clr-input-container>
+          <clr-password-container>
+              <label class="clr-sr-only">Senha</label>
+              <input type="password" autocomplete="current-password" maxlength="150"
+               name="password" clrPassword placeholder="Senha" formControlName="senha"/>
+          </clr-password-container>
+          <div class="error active" *ngIf="formulario.controls['email'].errors?.['email'] && !formulario.controls['email'].pristine">
+            Campo e-mail inválido.
+          </div>
+          <div class="error active" *ngIf="formulario.controls['email'].errors?.['required'] && !formulario.controls['email'].pristine">
+            Campo e-mail é obrigatório.
+          </div>
+          <div class="error active" *ngIf="formulario.controls['senha'].errors?.['required'] && !formulario.controls['senha'].pristine">
+            Campo senha é obrigatório.
+          </div>
+          <button [disabled]="!formulario.valid" type="submit" class="btn btn-primary">Entrar</button>
+          <a routerLink="/cadastro-usuario" class="signup">Cadastre-se</a>
+      </div>
+  </form>
+</div>

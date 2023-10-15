@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Editar Livro</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="formulario">
+    <mat-form-field class="full-width">
+      <mat-label> Id</mat-label>
+      <input matInput formControlName="idHidden" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label> Título</mat-label>
+      <input matInput formControlName="titulo">
+      <mat-error *ngIf="formulario.controls?.['titulo']">
+        <span *ngIf="formulario.controls['titulo'].errors?.['required']">O título é obrigatório.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label> Autor</mat-label>
+      <input matInput formControlName="autor" type="text">
+      <mat-error *ngIf="formulario.controls?.['autor']">
+        <span *ngIf="formulario.controls['autor'].errors?.['required']">O nome do autor é obrigatório.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label> Gênero </mat-label>
+      <input matInput formControlName="genero" type="text">
+      <mat-error *ngIf="formulario.controls?.['genero']">
+        <span *ngIf="formulario.controls['genero'].errors?.['required']">O gênero é obrigatório.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Sinopse</mat-label>
+      <textarea matInput formControlName="descricao"></textarea>
+      <mat-error *ngIf="formulario.controls?.['descricao']">
+        <span *ngIf="formulario.controls['descricao'].errors?.['required']"
+          >A sinopse é obrigatória.</span
+        >
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial
+  [mat-dialog-close]="true"
+  [disabled]="!formulario.valid"
+  (click)="cadastrar()">Atualizar</button>
+</mat-dialog-actions>

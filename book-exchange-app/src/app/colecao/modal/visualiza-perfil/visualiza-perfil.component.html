@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>Perfil do Usuário</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-tab-group>
+    <mat-tab label="Informações">
+      <div>
+        <br/>
+        <mat-form-field class="full-width">
+          <mat-label>Nome</mat-label>
+          <input matInput disabled [(ngModel)]="data.nome" name="nome">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>E-mail</mat-label>
+          <input matInput disabled [(ngModel)]="data.email" email="email">
+        </mat-form-field>
+      </div>
+    </mat-tab>
+    <mat-tab label="Avaliações">
+      <br/>
+      <mat-form-field class="full-width">
+        <mat-label>Deixe uma avaliação</mat-label>
+        <textarea matInput placeholder="O usuário é confiável..."
+         [(ngModel)]="comentario"></textarea>
+      </mat-form-field>
+      <div class="row">
+      </div>
+      <div *ngFor="let item of comentarios">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>{{ item.nomeUsuarioAvaliador }} </mat-card-title>
+            <mat-card-subtitle>{{
+              item.dataAvaliacao | date
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p style="color: white">{{ item.comentario }}</p>
+          </mat-card-content>
+        </mat-card>
+        <br />
+      </div>
+      <!-- Controle de paginação -->
+      <mat-paginator
+        [length]="totalElements"
+        [pageSize]="tamanhoPagina"
+        (page)="paginar($event)"
+      ></mat-paginator>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="avaliar()">Avaliar</button>
+</mat-dialog-actions>

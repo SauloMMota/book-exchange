@@ -1,0 +1,19 @@
+<header class="header-6">
+  <div class="branding">
+      <a class="nav-link">
+          <cds-icon shape="book" routerLink="/home"></cds-icon>
+          <span class="title">Book Exchanger</span>
+      </a>
+  </div>
+  <div class="header-actions">
+      <clr-dropdown>
+          <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
+              <cds-icon shape="cog"></cds-icon>
+              <cds-icon shape="angle" direction="down"></cds-icon>
+          </button>
+          <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+              <a routerLink="/login" clrDropdownItem (click)="sair()">Sair</a>
+          </clr-dropdown-menu>
+      </clr-dropdown>
+  </div>
+</header>

@@ -1,0 +1,63 @@
+<div class="main-container">
+  <header class="header-2">
+    <div class="branding">
+      <a class="nav-link">
+        <cds-icon shape="book"  routerLink=""></cds-icon>
+        <span class="title">Book Exchange</span>
+      </a>
+    </div>
+  </header>
+  <div class="parentContainer">
+    <div class="childContainer">
+      <h3 class="title">Cadastro de Usuário</h3>
+      <form
+        clrForm
+        clrLabelSize="2"
+        [formGroup]="formulario"
+        (ngSubmit)="cadastrar()"
+      >
+        <clr-control-container>
+          <label>Nome</label>
+          <input
+            clrControl
+            placeholder="Nome"
+            formControlName="nome"
+            name="nome"
+            id="nome"
+            maxlength="150"
+          />
+          <clr-control-error *clrIfError="'required'">O nome é obrigatório.</clr-control-error>
+        </clr-control-container>
+
+        <clr-control-container>
+          <label>E-mail</label>
+          <input
+            clrControl
+            id="email"
+            placeholder="E-mail"
+            formControlName="email"
+            name="email"
+            maxlength="150"
+          />
+          <clr-control-error *clrIfError="'required'">O e-mail é obrigatório.</clr-control-error>
+        </clr-control-container>
+
+        <clr-password-container>
+            <label>Senha</label>
+            <input
+              clrPassword
+              autocomplete="current-password"
+              placeholder="Informe a senha"
+              name="senha"
+              formControlName="senha"
+              maxlength="150"
+            />
+            <clr-control-error *clrIfError="'required'">A senha é obrigatório.</clr-control-error>
+        </clr-password-container>
+        <br>
+        <button [disabled]="formulario.status == 'INVALID'" class="btn btn-primary" type="submit">Cadastrar</button>
+        <button class="btn btn-warning-outline" routerLink="">Voltar</button>
+      </form>
+    </div>
+  </div>
+</div>
