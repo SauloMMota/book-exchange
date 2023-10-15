@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: ms-livros
+  datasource:
+    url: jdbc:postgresql://be-bd-livros:5432/db_livros
+    username: postgres
+    password: 123456
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${KEYCLOAK_SERVER}:${KEYCLOAK_PORT}/realms/bookexchangerealm
+          jwk-set-uri: http://${KEYCLOAK_SERVER}:${KEYCLOAK_PORT}/realms/bookexchangerealm/protocol/openid-connect/certs
+
+server:
+  port: 0
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value} }
+  client:
+    service-url:
+      defaultZone: http://book-exchange-user:rnege-aoxsu-chokbe@${EUREKA_SERVER}:8761/eureka
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: INFO
+  file:
+    name: ./logs/log-file.log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: mscloudgateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${KEYCLOAK_SERVER}:${KEYCLOAK_PORT}/realms/bookexchangerealm
+          jwk-set-uri: http://${KEYCLOAK_SERVER}:${KEYCLOAK_PORT}/realms/bookexchangerealm/protocol/openid-connect/certs
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://book-exchange-user:rnege-aoxsu-chokbe@${EUREKA_SERVER}:8761/eureka
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: INFO
