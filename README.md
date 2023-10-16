@@ -18,10 +18,6 @@ docker network create bookexchange-network
 1) docker build --tag be-ms-usuario .
 2) docker run --name be-ms-usuario --network bookexchange-network -e EUREKA_SERVER=be-eureka -e KEYCLOAK_SERVER=bookexchange-keycloak -e KEYCLOAK_PORT=8080 -d be-ms-usuario
 
-# Microserviço de Usuários
-1) docker build --tag be-ms-livro .
-2) docker run --name be-ms-livro --network bookexchange-network -e EUREKA_SERVER=be-eureka -e KEYCLOAK_SERVER=bookexchange-keycloak -e KEYCLOAK_PORT=8080 -d be-ms-livro
-
 # Microserviço de Livros
 1) docker build --tag be-ms-livro .
 2) docker run --name be-ms-livro --network bookexchange-network -e EUREKA_SERVER=be-eureka -e KEYCLOAK_SERVER=bookexchange-keycloak -e KEYCLOAK_PORT=8080 -d be-ms-livro
